@@ -1,0 +1,2 @@
+release: python manage.py migrate
+web: unicorn commerce.wsgi --log-file -

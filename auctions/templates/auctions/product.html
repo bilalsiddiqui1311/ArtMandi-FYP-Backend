@@ -1,0 +1,47 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+   <h2>{{product.title}}</h2>
+   <img src="{{product.image}}" alt="{{product.title}}" width="30%">
+   <p><strong>Product Description:</strong> {{product.description}}</p>
+   <p><strong>Start Price:</strong> {{product.start_price}}</p>
+   <p><strong> Created By: </strong> {{user_listing.user}}</p>
+   <p><strong> Last Max Bid: </strong>{{Max_Bid}}</p>
+   {% if user == user_listing.user %}
+      <form action="{% url 'CloseBid' product.id %}">
+         <button class="btn btn-primary">Close Bid</button>
+      </form>
+   {% else %}
+      <form action="{% url 'product' product.id user.id %}" method="POST">
+         {%csrf_token%}
+         {% if error %}
+            {{error}}
+            <br>
+            {{bidding}}
+         {%else%}
+            {{bidding}}
+         {%endif%}
+         <br>
+         <button class="btn btn-primary" name="Bid"> Submit</button>
+      </form>
+      <br>
+   {%endif%}
+      <h2>ALL COMMENTS</h2>
+      <form action="{% url 'product' product.id user.id %}" method="POST">
+         {%csrf_token%}
+         {%for i in All_Comments%}
+         <ul>
+            <li>{{i.comment}} by {{i.user}}</li>
+            
+
+
+         </ul>
+            
+         {%endfor%}
+         <br>
+         {{comments}}               
+         <br>
+         <button class="btn btn-primary" name="Comment"> Post</button>
+      </form>
+   
+{% endblock %}
