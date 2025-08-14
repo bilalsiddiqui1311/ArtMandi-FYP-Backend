@@ -1,0 +1,16 @@
+{%extends "auctions/layout.html" %}
+
+{%block body%}
+    {%if message%}
+        {{message}}
+    {%else%}
+    
+        <form action="{% url 'listing' %}" method="POST">
+            {%csrf_token%}
+            {{form}}
+            <br>
+            <input type="submit" class="btn btn-primary" >
+
+        </form>
+    {%endif%}
+{% endblock %}

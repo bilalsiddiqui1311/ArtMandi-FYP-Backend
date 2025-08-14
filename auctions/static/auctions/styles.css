@@ -1,0 +1,15 @@
+body {
+    padding: 10px;
+}
+
+.my-grid
+{
+  display: grid;
+  grid-template-columns: repeat(1fr, 2);
+  grid-gap: 8px;
+}
+
+.grid-element{
+    background-origin: padding-box;
+    border: 10px solid black;
+}

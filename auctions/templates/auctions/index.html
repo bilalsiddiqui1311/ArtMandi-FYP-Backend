@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <div class="my-grid">
+        {% for prod in products %}
+            <div class="grid-element">
+                {% if user.is_authenticated %}
+                <a href="{%url 'product' prod.id user.id%}">
+                    <img src="{{prod.image}}" alt="{{prod.title}}" width="20%"><br>
+                    {{prod.start_price}}$ <br>
+                    {{prod.title}}
+                </a>
+                {% else %}
+                <a href="{% url 'login' %}">
+                    <img src="{{prod.image}}" alt="{{prod.title}}" width="20%"><br>
+                    {{prod.start_price}}$ <br>
+                    {{prod.title}}
+                </a>
+                    
+                {% endif %}
+                
+                
+            </div>
+        {% endfor %}
+        </div>
+{% endblock %}
